@@ -1,0 +1,29 @@
+server:
+  port: 5891
+
+config:
+  security:
+    jwt-secret: secret
+    access-token-duration-minutes: 10
+    refresh-token-duration-minutes: 30
+  postgres:
+    url: localhost:5432
+    db-name: client_information_db
+    username: postgres
+    password: postgres
+
+spring:
+  datasource:
+    url: jdbc:postgresql://${config.postgres.url}/${config.postgres.db-name}
+    username: ${config.postgres.username}
+    password: ${config.postgres.password}
+  jpa:
+    generate-ddl: true
+    properties:
+      hibernate:
+        ddl-auto: create-drop
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        show-sql: false
+
+zipcode-limit:
+  default-limit-kw: 1000
